@@ -1,0 +1,9 @@
+@echo off
+echo Freeing ports 3000 and 3001...
+for /f "tokens=5" %%a in ('netstat -aon ^| find ":3000" ^| find "LISTENING"') do taskkill /f /pid %%a
+for /f "tokens=5" %%a in ('netstat -aon ^| find ":3001" ^| find "LISTENING"') do taskkill /f /pid %%a
+
+echo Starting Server...
+start cmd /k "cd server && npm start"
+echo Starting Client...
+start cmd /k "cd client && npm start"
